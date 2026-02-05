@@ -37,19 +37,19 @@ Middleware in Next.js automatically runs on the Edge Runtime. As we saw in the p
 
 ```typescript
 // middleware.ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
   // This code runs on the Edge Runtime
-  const country = request.geo?.country || 'US';
+  const country = request.geo?.country || 'US'
 
   // Customize response based on user's country
   if (country === 'GB') {
-    return NextResponse.rewrite(new URL('/uk', request.url));
+    return NextResponse.rewrite(new URL('/uk', request.url))
   }
 
-  return NextResponse.next();
+  return NextResponse.next()
 }
 ```
 
@@ -59,19 +59,19 @@ You can explicitly set an API route to use the Edge Runtime:
 
 ```typescript
 // app/api/edge-example/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'
 
-export const runtime = 'edge'; // Set Edge Runtime
+export const runtime = 'edge' // Set Edge Runtime
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get('q') || 'world';
+  const { searchParams } = new URL(request.url)
+  const query = searchParams.get('q') || 'world'
 
   return NextResponse.json({
     message: `Hello, ${query}!`,
     location: request.geo?.city || 'Unknown',
-    timestamp: new Date().toISOString()
-  });
+    timestamp: new Date().toISOString(),
+  })
 }
 ```
 
@@ -133,19 +133,19 @@ Vercel provides Edge Config, a key-value data store designed to work with Edge F
 
 ```typescript
 // Example using Edge Config with Edge Runtime
-import { NextResponse } from 'next/server';
-import { get } from '@vercel/edge-config';
+import { NextResponse } from 'next/server'
+import { get } from '@vercel/edge-config'
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
 export async function GET() {
   // Fetch configuration from Edge Config
-  const featureFlags = await get('featureFlags');
+  const featureFlags = await get('featureFlags')
 
   return NextResponse.json({
     features: featureFlags,
-    timestamp: Date.now()
-  });
+    timestamp: Date.now(),
+  })
 }
 ```
 
