@@ -1,0 +1,11 @@
+{
+  // Keep editor feedback, but stop VS Code from painting file names red in the Explorer.
+  "problems.decorations.enabled": false,
+
+  // Make ESLint unused-vars show as warnings (yellow) rather than errors.
+  // (This can override other configs/extensions that promote it to error.)
+  "eslint.rules.customizations": [
+    { "rule": "no-unused-vars", "severity": "warn" },
+    { "rule": "@typescript-eslint/no-unused-vars", "severity": "warn" }
+  ]
+}
